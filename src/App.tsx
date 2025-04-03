@@ -17,9 +17,9 @@ function App() {
   const isNegativeROI = roi < 0
   const isNegativeRevenue = totalRevenue < cpa
 
-  return (
+ return (
+  <div className="bg-[#f8f9fa] min-h-screen flex items-center justify-center px-4">
     <div className="calculator-wrapper">
-      <div className="calculator-container">
         <h1 style={{
           fontSize: "1.75rem",
           fontWeight: "700",
