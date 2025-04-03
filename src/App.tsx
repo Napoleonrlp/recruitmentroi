@@ -16,69 +16,43 @@ function App() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#f5f5f5",
+      backgroundColor: "#f8f9fa",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      padding: "2rem"
+      padding: "1rem"
     }}>
       <div style={{
         width: "100%",
-        maxWidth: "600px",
-        background: "#ffffff",
-        padding: "1.5rem",
+        maxWidth: "420px",
+        backgroundColor: "#fff",
         borderRadius: "0.75rem",
-        boxShadow: "0 10px 25px rgba(0, 0, 0, 0.05)",
-        boxSizing: "border-box"
+        padding: "1.5rem",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)"
       }}>
         <h1 style={{
-          fontSize: "2rem",
-          fontWeight: 700,
-          textAlign: "center",
+          fontSize: "1.75rem",
+          fontWeight: "700",
           color: "#c8102e",
+          textAlign: "center",
           marginBottom: "1.5rem"
-        }}>
-          Recruitment ROI Calculator
-        </h1>
+        }}>Recruitment ROI Calculator</h1>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div>
-            <label>Agent Annual GCI ($)</label>
-            <input type="number" value={gci} onChange={e => setGCI(Number(e.target.value))} style={inputStyle} />
-          </div>
-
-          <div>
-            <label>Retention (Years)</label>
-            <input type="number" value={years} onChange={e => setYears(Number(e.target.value))} style={inputStyle} />
-          </div>
-
-          <div>
-            <label>Cost Per Agent Hired (CPA $)</label>
-            <input type="number" value={cpa} onChange={e => setCPA(Number(e.target.value))} style={inputStyle} />
-          </div>
-
-          <div>
-            <label>Monthly Membership Fee ($)</label>
-            <input type="number" value={monthlyFee} onChange={e => setMonthlyFee(Number(e.target.value))} style={inputStyle} />
-          </div>
-
-          <div>
-            <label>Royalty Rate (%)</label>
-            <input type="number" step="0.001" value={royaltyRate} onChange={e => setRoyaltyRate(Number(e.target.value))} style={inputStyle} />
-          </div>
-
-          <div>
-            <label>Royalty Cap ($)</label>
-            <input type="number" value={royaltyCap} onChange={e => setRoyaltyCap(Number(e.target.value))} style={inputStyle} />
-          </div>
-
-          <hr style={{ margin: "1rem 0" }} />
-
-          <p><strong>Total Revenue:</strong> ${totalRevenue.toLocaleString()}</p>
-          <p><strong>ROI:</strong> {roi.toFixed(2)}%</p>
+          <InputBlock label="Agent Annual GCI ($)" value={gci} onChange={setGCI} />
+          <InputBlock label="Retention (Years)" value={years} onChange={setYears} />
+          <InputBlock label="Cost Per Agent Hired (CPA $)" value={cpa} onChange={setCPA} />
+          <InputBlock label="Monthly Membership Fee ($)" value={monthlyFee} onChange={setMonthlyFee} />
+          <InputBlock label="Royalty Rate (%)" value={royaltyRate} onChange={setRoyaltyRate} step={0.001} />
+          <InputBlock label="Royalty Cap ($)" value={royaltyCap} onChange={setRoyaltyCap} />
         </div>
 
-        <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#6b7280", marginTop: "1.5rem" }}>
+        <hr style={{ margin: "1.5rem 0" }} />
+
+        <p><strong>Total Revenue:</strong> ${totalRevenue.toLocaleString()}</p>
+        <p><strong>ROI:</strong> {roi.toFixed(2)}%</p>
+
+        <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#6c757d", marginTop: "1.5rem" }}>
           Created by Napoleon Jamir for Royal LePage
         </p>
       </div>
@@ -86,14 +60,32 @@ function App() {
   )
 }
 
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "0.5rem",
-  border: "1px solid #ccc",
-  borderRadius: "0.375rem",
-  fontSize: "1rem",
-  marginTop: "0.25rem",
-  boxSizing: "border-box"
+function InputBlock({ label, value, onChange, step = 1 }: {
+  label: string,
+  value: number,
+  onChange: (val: number) => void,
+  step?: number
+}) {
+  return (
+    <div>
+      <label style={{ fontSize: "0.875rem", fontWeight: 500 }}>{label}</label>
+      <input
+        type="number"
+        value={value}
+        step={step}
+        onChange={e => onChange(Number(e.target.value))}
+        style={{
+          width: "100%",
+          padding: "0.5rem",
+          fontSize: "1rem",
+          marginTop: "0.25rem",
+          borderRadius: "0.375rem",
+          border: "1px solid #ced4da",
+          boxSizing: "border-box"
+        }}
+      />
+    </div>
+  )
 }
 
 export default App
