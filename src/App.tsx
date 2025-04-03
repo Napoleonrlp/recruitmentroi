@@ -18,21 +18,23 @@ function App() {
 
   return (
     <div style={{
-      minHeight: "100vh",
-      backgroundColor: "#f8f9fa",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "1rem"
-    }}>
+  minHeight: "100vh",
+  backgroundColor: "#f8f9fa",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "2rem",
+  boxSizing: "border-box"
+}}>
       <div style={{
-        width: "100%",
-        maxWidth: "420px",
-        backgroundColor: "#fff",
-        borderRadius: "0.75rem",
-        padding: "1.5rem",
-        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)"
-      }}>
+  width: "100%",
+  maxWidth: "600px",
+  backgroundColor: "#fff",
+  borderRadius: "0.75rem",
+  padding: "2rem",
+  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+  boxSizing: "border-box"
+}}>
         <h1 style={{
           fontSize: "1.75rem",
           fontWeight: "700",
