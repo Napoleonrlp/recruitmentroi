@@ -13,6 +13,9 @@ function App() {
   const totalRevenue = annualRevenue * years
   const roi = ((totalRevenue - cpa) / cpa) * 100
 
+  const isNegativeROI = roi < 0
+  const isNegativeRevenue = totalRevenue < cpa
+
   return (
     <div style={{
       minHeight: "100vh",
@@ -49,8 +52,20 @@ function App() {
 
         <hr style={{ margin: "1.5rem 0" }} />
 
-        <p><strong>Total Revenue:</strong> ${totalRevenue.toLocaleString()}</p>
-        <p><strong>ROI:</strong> {roi.toFixed(2)}%</p>
+        <p style={{
+          fontWeight: 600,
+          color: isNegativeRevenue ? '#c8102e' : '#198754',
+          fontSize: '1rem'
+        }}>
+          Total Revenue: ${totalRevenue.toLocaleString()}
+        </p>
+        <p style={{
+          fontWeight: 600,
+          color: isNegativeROI ? '#c8102e' : '#198754',
+          fontSize: '1rem'
+        }}>
+          ROI: {roi.toFixed(2)}%
+        </p>
 
         <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#6c757d", marginTop: "1.5rem" }}>
           Created by Napoleon Jamir for Royal LePage
