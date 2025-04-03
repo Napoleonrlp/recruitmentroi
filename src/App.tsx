@@ -74,23 +74,4 @@ function App() {
           <div style={{ marginBottom: "1rem" }}>
             <label>Royalty Cap ($)</label>
             <input
-              type="number"
-              value={royaltyCap}
-              onChange={(e) => setRoyaltyCap(Number(e.target.value))}
-              style={{ width: "100%", padding: "0.5rem" }}
-            />
-          </div>
-
-          <hr style={{ margin: "1rem 0" }} />
-          <p><strong>Total Revenue:</strong> ${totalRevenue.toLocaleString()}</p>
-          <p><strong>ROI:</strong> {roi.toFixed(2)}%</p>
-        </div>
-        <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#6b7280", marginTop: "1rem" }}>
-          Created by Napoleon Jamir for Royal LePage
-        </p>
-      </div>
-    </div>
-  )
-}
-
-export default App
+              type
