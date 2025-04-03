@@ -8,8 +8,6 @@ function App() {
   const [royaltyRate, setRoyaltyRate] = useState<number>(0.01)
   const [royaltyCap, setRoyaltyCap] = useState<number>(1525)
 
-["Agent Annual GCI ($)", gci, setGCI],
-
   const annualRoyalty = Math.min(gci * royaltyRate, royaltyCap)
   const annualRevenue = monthlyFee * 12 + annualRoyalty
   const totalRevenue = annualRevenue * years
