@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './App.css'
 
 function App() {
   const [gci, setGCI] = useState<number>(100000)
@@ -17,24 +18,8 @@ function App() {
   const isNegativeRevenue = totalRevenue < cpa
 
   return (
-    <div style={{
-  minHeight: "100vh",
-  backgroundColor: "#f8f9fa",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "2rem",
-  boxSizing: "border-box"
-}}>
-      <div style={{
-  width: "100%",
-  maxWidth: "600px",
-  backgroundColor: "#fff",
-  borderRadius: "0.75rem",
-  padding: "2rem",
-  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
-  boxSizing: "border-box"
-}}>
+    <div className="calculator-wrapper">
+      <div className="calculator-container">
         <h1 style={{
           fontSize: "1.75rem",
           fontWeight: "700",
@@ -54,19 +39,11 @@ function App() {
 
         <hr style={{ margin: "1.5rem 0" }} />
 
-        <p style={{
-          fontWeight: 600,
-          color: isNegativeRevenue ? '#c8102e' : '#198754',
-          fontSize: '1rem'
-        }}>
-          Total Revenue: ${totalRevenue.toLocaleString()}
+        <p className={isNegativeRevenue ? 'result-negative' : 'result-positive'}>
+          <strong>Total Revenue:</strong> ${totalRevenue.toLocaleString()}
         </p>
-        <p style={{
-          fontWeight: 600,
-          color: isNegativeROI ? '#c8102e' : '#198754',
-          fontSize: '1rem'
-        }}>
-          ROI: {roi.toFixed(2)}%
+        <p className={isNegativeROI ? 'result-negative' : 'result-positive'}>
+          <strong>ROI:</strong> {roi.toFixed(2)}%
         </p>
 
         <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#6c757d", marginTop: "1.5rem" }}>
