@@ -14,47 +14,47 @@ function App() {
   const roi = ((totalRevenue - cpa) / cpa) * 100
 
   return (
-    <div style={{ minHeight: '100vh', background: '#f9fafb', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem' }}>
-      <div style={{ width: '100%', maxWidth: '600px' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', textAlign: 'center', color: '#1f2937' }}>
+    <div style={{ minHeight: "100vh", background: "#f9fafb", display: "flex", justifyContent: "center", alignItems: "center", padding: "2rem" }}>
+      <div style={{ width: "100%", maxWidth: "600px" }}>
+        <h1 style={{ fontSize: "2rem", fontWeight: "bold", textAlign: "center", color: "#1f2937" }}>
           Recruitment ROI Calculator
         </h1>
-        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 4px 14px rgba(0,0,0,0.1)', marginTop: '1rem' }}>
-          <div style={{ marginBottom: '1rem' }}>
+        <div style={{ background: "white", padding: "1.5rem", borderRadius: "0.5rem", boxShadow: "0 4px 14px rgba(0,0,0,0.1)", marginTop: "1rem" }}>
+          <div style={{ marginBottom: "1rem" }}>
             <label>Agent Annual GCI ($)</label>
-            <input type="number" value={gci} onChange={e => setGCI(Number(e.target.value))} style={{ width: '100%', padding: '0.5rem' }} />
+            <input type="number" value={gci} onChange={e => setGCI(Number(e.target.value))} style={{ width: "100%", padding: "0.5rem" }} />
           </div>
 
-          <div style={{ marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem" }}>
             <label>Retention (Years)</label>
-            <input type="number" value={years} onChange={e => setYears(Number(e.target.value))} style={{ width: '100%', padding: '0.5rem' }} />
+            <input type="number" value={years} onChange={e => setYears(Number(e.target.value))} style={{ width: "100%", padding: "0.5rem" }} />
           </div>
 
-          <div style={{ marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem" }}>
             <label>Cost Per Agent Hired (CPA $)</label>
-            <input type="number" value={cpa} onChange={e => setCPA(Number(e.target.value))} style={{ width: '100%', padding: '0.5rem' }} />
+            <input type="number" value={cpa} onChange={e => setCPA(Number(e.target.value))} style={{ width: "100%", padding: "0.5rem" }} />
           </div>
 
-          <div style={{ marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem" }}>
             <label>Monthly Membership Fee ($)</label>
-            <input type="number" value={monthlyFee} onChange={e => setMonthlyFee(Number(e.target.value))} style={{ width: '100%', padding: '0.5rem' }} />
+            <input type="number" value={monthlyFee} onChange={e => setMonthlyFee(Number(e.target.value))} style={{ width: "100%", padding: "0.5rem" }} />
           </div>
 
-          <div style={{ marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem" }}>
             <label>Royalty Rate (%)</label>
-            <input type="number" step="0.001" value={royaltyRate} onChange={e => setRoyaltyRate(Number(e.target.value))} style={{ width: '100%', padding: '0.5rem' }} />
+            <input type="number" step="0.001" value={royaltyRate} onChange={e => setRoyaltyRate(Number(e.target.value))} style={{ width: "100%", padding: "0.5rem" }} />
           </div>
 
-          <div style={{ marginBottom: '1rem' }}>
+          <div style={{ marginBottom: "1rem" }}>
             <label>Royalty Cap ($)</label>
-            <input type="number" value={royaltyCap} onChange={e => setRoyaltyCap(Number(e.target.value))} style={{ width: '100%', padding: '0.5rem' }} />
+            <input type="number" value={royaltyCap} onChange={e => setRoyaltyCap(Number(e.target.value))} style={{ width: "100%", padding: "0.5rem" }} />
           </div>
 
-          <hr style={{ margin: '1rem 0' }} />
+          <hr style={{ margin: "1rem 0" }} />
           <p><strong>Total Revenue:</strong> ${totalRevenue.toLocaleString()}</p>
           <p><strong>ROI:</strong> {roi.toFixed(2)}%</p>
         </div>
-        <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6b7280', marginTop: '1rem' }}>
+        <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#6b7280", marginTop: "1rem" }}>
           Created by Napoleon Jamir for Royal LePage
         </p>
       </div>
