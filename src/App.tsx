@@ -17,18 +17,14 @@ function App() {
   const isNegativeROI = roi < 0
   const isNegativeRevenue = totalRevenue < cpa
 
- return (
-  <div className="bg-[#f8f9fa] min-h-screen flex items-center justify-center px-4">
-    <div className="calculator-wrapper">
-        <h1 style={{
-          fontSize: "1.75rem",
-          fontWeight: "700",
-          color: "#c8102e",
-          textAlign: "center",
-          marginBottom: "1.5rem"
-        }}>Recruitment ROI Calculator</h1>
+  return (
+    <div className="bg-[#f8f9fa] min-h-screen flex items-center justify-center px-4">
+      <div className="calculator-wrapper">
+        <h1 className="text-[1.75rem] font-bold text-[#c8102e] text-center mb-6">
+          Recruitment ROI Calculator
+        </h1>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="flex flex-col gap-4">
           <InputBlock label="Agent Annual GCI ($)" value={gci} onChange={setGCI} />
           <InputBlock label="Retention (Years)" value={years} onChange={setYears} />
           <InputBlock label="Cost Per Agent Hired (CPA $)" value={cpa} onChange={setCPA} />
@@ -37,16 +33,16 @@ function App() {
           <InputBlock label="Royalty Cap ($)" value={royaltyCap} onChange={setRoyaltyCap} />
         </div>
 
-        <hr style={{ margin: "1.5rem 0" }} />
+        <hr className="my-6" />
 
-        <p className={isNegativeRevenue ? 'result-negative' : 'result-positive'}>
+        <p className={`result ${isNegativeRevenue ? 'negative' : 'positive'}`}>
           <strong>Total Revenue:</strong> ${totalRevenue.toLocaleString()}
         </p>
-        <p className={isNegativeROI ? 'result-negative' : 'result-positive'}>
+        <p className={`result ${isNegativeROI ? 'negative' : 'positive'}`}>
           <strong>ROI:</strong> {roi.toFixed(2)}%
         </p>
 
-        <p style={{ textAlign: "center", fontSize: "0.875rem", color: "#6c757d", marginTop: "1.5rem" }}>
+        <p className="text-center text-sm text-gray-500 mt-6">
           Created by Napoleon Jamir for Royal LePage
         </p>
       </div>
@@ -54,29 +50,23 @@ function App() {
   )
 }
 
-function InputBlock({ label, value, onChange, step = 1 }: {
-  label: string,
-  value: number,
-  onChange: (val: number) => void,
+interface InputBlockProps {
+  label: string
+  value: number
+  onChange: (val: number) => void
   step?: number
-}) {
+}
+
+function InputBlock({ label, value, onChange, step = 1 }: InputBlockProps) {
   return (
     <div>
-      <label style={{ fontSize: "0.875rem", fontWeight: 500 }}>{label}</label>
+      <label className="block text-sm font-medium text-gray-700">{label}</label>
       <input
         type="number"
         value={value}
         step={step}
         onChange={e => onChange(Number(e.target.value))}
-        style={{
-          width: "100%",
-          padding: "0.5rem",
-          fontSize: "1rem",
-          marginTop: "0.25rem",
-          borderRadius: "0.375rem",
-          border: "1px solid #ced4da",
-          boxSizing: "border-box"
-        }}
+        className="mt-1 w-full p-2 text-base border border-gray-300 rounded-md box-border"
       />
     </div>
   )
