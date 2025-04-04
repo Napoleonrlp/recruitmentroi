@@ -7,7 +7,7 @@ function App() {
     years: 3,
     cpa: 10126.99,
     monthlyFee: 144,
-    royaltyRate: 1, // input as percent
+    royaltyRate: 1, // User enters 1 for 1%
     royaltyCap: 1525
   })
 
@@ -33,7 +33,8 @@ function App() {
     setLoading(true)
     await new Promise(resolve => setTimeout(resolve, 800))
     const { gci, years, cpa, monthlyFee, royaltyRate, royaltyCap } = form
-    const annualRoyalty = Math.min(gci * (royaltyRate / 100), royaltyCap)
+    const rate = royaltyRate / 100 // Convert percent to decimal
+    const annualRoyalty = Math.min(gci * rate, royaltyCap)
     const annualRevenue = monthlyFee * 12 + annualRoyalty
     const totalRevenue = annualRevenue * years
     const roi = ((totalRevenue - cpa) / cpa) * 100
@@ -104,15 +105,27 @@ function App() {
       </div>
 
       {result && (
-        <>
-          <hr style={{ margin: '1.5rem 0' }} />
-          <p className={result.revenue < form.cpa ? 'result-negative' : 'result-positive'}>
-            <strong>Total Revenue:</strong> ${result.revenue.toLocaleString()}
+        <div
+          style={{
+            marginTop: '2rem',
+            padding: '1.5rem',
+            border: `2px solid ${result.roi < 0 ? '#c8102e' : '#198754'}`,
+            borderRadius: '12px',
+            background: result.roi < 0 ? '#ffe6e9' : '#e6f4ea',
+            textAlign: 'center',
+            maxWidth: '100%',
+            fontWeight: 'bold',
+            color: result.roi < 0 ? '#c8102e' : '#198754'
+          }}
+        >
+          <p style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>
+            <strong>ESTIMATED ROI</strong>
           </p>
-          <p className={result.roi < 0 ? 'result-negative' : 'result-positive'}>
-            <strong>ROI:</strong> {result.roi.toFixed(2)}%
+          <p style={{ fontSize: '2rem' }}>{result.roi.toFixed(2)}%</p>
+          <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', color: '#6c757d' }}>
+            Based on a tenure of {form.years} year(s)
           </p>
-        </>
+        </div>
       )}
 
       <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6c757d', marginTop: '2rem' }}>
