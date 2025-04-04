@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import html2canvas from 'html2canvas'
 import './App.css'
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
   const [snapshots, setSnapshots] = useState<
     { revenue: number; roi: number; timestamp: string }[]
   >([])
+
+  const resultRef = useRef<HTMLDivElement>(null)
 
   const handleChange = (key: string, value: number) => {
     setForm(prev => ({ ...prev, [key]: value }))
@@ -67,16 +70,15 @@ function App() {
     }
   }
 
-  const downloadSnapshots = () => {
-    const csvHeader = "Timestamp,Total Revenue,ROI\n"
-    const csvRows = snapshots.map(s => `${s.timestamp},${s.revenue},${s.roi.toFixed(2)}%`).join("\n")
-    const blob = new Blob([csvHeader + csvRows], { type: 'text/csv' })
-    const url = window.URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = 'roi_snapshots.csv'
-    link.click()
-    window.URL.revokeObjectURL(url)
+  const downloadSnapshotImage = () => {
+    if (resultRef.current) {
+      html2canvas(resultRef.current).then(canvas => {
+        const link = document.createElement('a')
+        link.download = 'roi_snapshot.png'
+        link.href = canvas.toDataURL()
+        link.click()
+      })
+    }
   }
 
   return (
@@ -145,24 +147,17 @@ function App() {
       </div>
 
       {result && (
-        <>
-          <hr style={{ margin: '1.5rem 0' }} />
+        <div ref={resultRef} style={{ marginTop: '1.5rem', padding: '1rem', background: '#fff', borderRadius: '8px', border: '1px solid #ddd' }}>
           <p className={result.revenue < form.cpa ? 'result-negative' : 'result-positive'}>
             <strong>Total Revenue:</strong> ${result.revenue.toLocaleString()}
           </p>
           <p className={result.roi < 0 ? 'result-negative' : 'result-positive'}>
             <strong>ROI:</strong> {result.roi.toFixed(2)}%
           </p>
-        </>
-      )}
-
-      {snapshots.length > 0 && (
-        <div style={{ marginTop: '2rem' }}>
-          <h2 style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>Saved Snapshots</h2>
           <button
-            onClick={downloadSnapshots}
+            onClick={downloadSnapshotImage}
             style={{
-              marginBottom: '1rem',
+              marginTop: '1rem',
               padding: '0.5rem 1rem',
               background: '#0d6efd',
               color: '#fff',
@@ -172,20 +167,8 @@ function App() {
               cursor: 'pointer'
             }}
           >
-            Download CSV
+            Download as Image
           </button>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            {snapshots.map((snap, i) => (
-              <li key={i} style={{
-                background: '#f1f3f5',
-                padding: '0.75rem',
-                marginBottom: '0.5rem',
-                borderRadius: '6px'
-              }}>
-                <strong>{snap.timestamp}</strong> — Revenue: ${snap.revenue.toLocaleString()}, ROI: {snap.roi.toFixed(2)}%
-              </li>
-            ))}
-          </ul>
         </div>
       )}
 
