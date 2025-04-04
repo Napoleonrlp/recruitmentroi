@@ -1,5 +1,4 @@
-import { useState, useRef } from 'react'
-import html2canvas from 'html2canvas'
+import { useState } from 'react'
 import './App.css'
 
 function App() {
@@ -14,11 +13,6 @@ function App() {
 
   const [result, setResult] = useState<{ revenue: number; roi: number } | null>(null)
   const [loading, setLoading] = useState(false)
-  const [snapshots, setSnapshots] = useState<
-    { revenue: number; roi: number; timestamp: string }[]
-  >([])
-
-  const resultRef = useRef<HTMLDivElement>(null)
 
   const handleChange = (key: string, value: number) => {
     setForm(prev => ({ ...prev, [key]: value }))
@@ -58,26 +52,6 @@ function App() {
         royaltyCap: 1525
       })
       setResult(null)
-    }
-  }
-
-  const saveSnapshot = () => {
-    if (result) {
-      setSnapshots(prev => [
-        { ...result, timestamp: new Date().toLocaleString() },
-        ...prev
-      ])
-    }
-  }
-
-  const downloadSnapshotImage = () => {
-    if (resultRef.current) {
-      html2canvas(resultRef.current).then(canvas => {
-        const link = document.createElement('a')
-        link.download = 'roi_snapshot.png'
-        link.href = canvas.toDataURL()
-        link.click()
-      })
     }
   }
 
@@ -127,48 +101,16 @@ function App() {
         >
           Reset
         </button>
-
-        {result && (
-          <button
-            onClick={saveSnapshot}
-            style={{
-              padding: '0.75rem 1.25rem',
-              background: '#198754',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '6px',
-              fontWeight: 'bold',
-              cursor: 'pointer'
-            }}
-          >
-            Save Snapshot
-          </button>
-        )}
       </div>
 
       {result && (
-        <div ref={resultRef} style={{ marginTop: '1.5rem', padding: '1rem', background: '#fff', borderRadius: '8px', border: '1px solid #ddd' }}>
+        <div style={{ marginTop: '1.5rem', padding: '1rem', background: '#fff', borderRadius: '8px', border: '1px solid #ddd' }}>
           <p className={result.revenue < form.cpa ? 'result-negative' : 'result-positive'}>
             <strong>Total Revenue:</strong> ${result.revenue.toLocaleString()}
           </p>
           <p className={result.roi < 0 ? 'result-negative' : 'result-positive'}>
             <strong>ROI:</strong> {result.roi.toFixed(2)}%
           </p>
-          <button
-            onClick={downloadSnapshotImage}
-            style={{
-              marginTop: '1rem',
-              padding: '0.5rem 1rem',
-              background: '#0d6efd',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '6px',
-              fontWeight: 'bold',
-              cursor: 'pointer'
-            }}
-          >
-            Download as Image
-          </button>
         </div>
       )}
 
