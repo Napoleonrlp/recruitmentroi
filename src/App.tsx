@@ -7,7 +7,7 @@ function App() {
     years: 3,
     cpa: 10126.99,
     monthlyFee: 144,
-    royaltyRate: 0.01,
+    royaltyRate: 1, // input as percent
     royaltyCap: 1525
   })
 
@@ -24,7 +24,7 @@ function App() {
     years: 3,
     cpa: 10126.99,
     monthlyFee: 144,
-    royaltyRate: 0.01,
+    royaltyRate: 1,
     royaltyCap: 1525
   })
 
@@ -33,7 +33,7 @@ function App() {
     setLoading(true)
     await new Promise(resolve => setTimeout(resolve, 800))
     const { gci, years, cpa, monthlyFee, royaltyRate, royaltyCap } = form
-    const annualRoyalty = Math.min(gci * royaltyRate, royaltyCap)
+    const annualRoyalty = Math.min(gci * (royaltyRate / 100), royaltyCap)
     const annualRevenue = monthlyFee * 12 + annualRoyalty
     const totalRevenue = annualRevenue * years
     const roi = ((totalRevenue - cpa) / cpa) * 100
@@ -48,7 +48,7 @@ function App() {
         years: 3,
         cpa: 10126.99,
         monthlyFee: 144,
-        royaltyRate: 0.01,
+        royaltyRate: 1,
         royaltyCap: 1525
       })
       setResult(null)
@@ -64,7 +64,7 @@ function App() {
         <InputBlock label="Retention (Years)" value={form.years} onChange={val => handleChange('years', val)} />
         <InputBlock label="Cost Per Agent Hired (CPA $)" value={form.cpa} onChange={val => handleChange('cpa', val)} />
         <InputBlock label="Monthly Membership Fee ($)" value={form.monthlyFee} onChange={val => handleChange('monthlyFee', val)} />
-        <InputBlock label="Royalty Rate (%)" value={form.royaltyRate} onChange={val => handleChange('royaltyRate', val)} step={0.001} />
+        <InputBlock label="Royalty Rate (%)" value={form.royaltyRate} onChange={val => handleChange('royaltyRate', val)} step={0.1} />
         <InputBlock label="Royalty Cap ($)" value={form.royaltyCap} onChange={val => handleChange('royaltyCap', val)} />
       </div>
 
@@ -104,14 +104,15 @@ function App() {
       </div>
 
       {result && (
-        <div style={{ marginTop: '1.5rem', padding: '1rem', background: '#fff', borderRadius: '8px', border: '1px solid #ddd' }}>
+        <>
+          <hr style={{ margin: '1.5rem 0' }} />
           <p className={result.revenue < form.cpa ? 'result-negative' : 'result-positive'}>
             <strong>Total Revenue:</strong> ${result.revenue.toLocaleString()}
           </p>
           <p className={result.roi < 0 ? 'result-negative' : 'result-positive'}>
             <strong>ROI:</strong> {result.roi.toFixed(2)}%
           </p>
-        </div>
+        </>
       )}
 
       <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#6c757d', marginTop: '2rem' }}>
