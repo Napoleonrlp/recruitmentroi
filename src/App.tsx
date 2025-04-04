@@ -7,7 +7,7 @@ function App() {
     years: 3,
     cpa: 10126.99,
     monthlyFee: 144,
-    royaltyRate: 1, // User enters 1 for 1%
+    royaltyRate: 1,
     royaltyCap: 1525
   })
 
@@ -33,7 +33,7 @@ function App() {
     setLoading(true)
     await new Promise(resolve => setTimeout(resolve, 800))
     const { gci, years, cpa, monthlyFee, royaltyRate, royaltyCap } = form
-    const rate = royaltyRate / 100 // Convert percent to decimal
+    const rate = royaltyRate / 100
     const annualRoyalty = Math.min(gci * rate, royaltyCap)
     const annualRevenue = monthlyFee * 12 + annualRoyalty
     const totalRevenue = annualRevenue * years
@@ -105,26 +105,31 @@ function App() {
       </div>
 
       {result && (
-        <div
-          style={{
-            marginTop: '2rem',
-            padding: '1.5rem',
-            border: `2px solid ${result.roi < 0 ? '#c8102e' : '#198754'}`,
-            borderRadius: '12px',
-            background: result.roi < 0 ? '#ffe6e9' : '#e6f4ea',
-            textAlign: 'center',
-            maxWidth: '100%',
+        <div style={{
+          marginTop: '2rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          padding: '1.5rem',
+          borderRadius: '12px',
+          background: '#ffffff',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            color: result.revenue < form.cpa ? '#c8102e' : '#198754'
+          }}>
+            Total Revenue: ${result.revenue.toLocaleString()}
+          </div>
+          <div style={{
+            fontSize: '1.5rem',
             fontWeight: 'bold',
             color: result.roi < 0 ? '#c8102e' : '#198754'
-          }}
-        >
-          <p style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>
-            <strong>ESTIMATED ROI</strong>
-          </p>
-          <p style={{ fontSize: '2rem' }}>{result.roi.toFixed(2)}%</p>
-          <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', color: '#6c757d' }}>
-            Based on a tenure of {form.years} year(s)
-          </p>
+          }}>
+            ROI: {result.roi.toFixed(2)}%
+          </div>
         </div>
       )}
 
