@@ -22,7 +22,7 @@ function App() {
   const hasChanged = JSON.stringify(form) !== JSON.stringify({
     gci: 100000,
     years: 3,
-    cpa: 10126.99,
+    cpa: 862.25,
     monthlyFee: 144,
     royaltyRate: 1,
     royaltyCap: 1525
