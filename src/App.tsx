@@ -5,7 +5,7 @@ function App() {
   const [form, setForm] = useState({
     gci: 100000,
     years: 3,
-    cpa: 10126.99,
+    cpa: 862.25,
     monthlyFee: 144,
     royaltyRate: 1,
     royaltyCap: 1525
@@ -47,7 +47,7 @@ function App() {
       setForm({
         gci: 100000,
         years: 3,
-        cpa: 10126.99,
+        cpa: 862.25,
         monthlyFee: 144,
         royaltyRate: 1,
         royaltyCap: 1525
