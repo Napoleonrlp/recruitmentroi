@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [form, setForm] = useState({
     gci: 52285.69,
-    years: 0.52,
+    years: 4.51,
     cpa: 862.25,
     monthlyFee: 144,
     royaltyRate: 1,
@@ -21,7 +21,7 @@ function App() {
   const isFormValid = Object.values(form).every(value => typeof value === 'number' && value >= 0)
   const hasChanged = JSON.stringify(form) !== JSON.stringify({
     gci: 52285.69,
-    years: 0.52,
+    years: 4.51,
     cpa: 862.25,
     monthlyFee: 144,
     royaltyRate: 1,
@@ -46,7 +46,7 @@ function App() {
     if (window.confirm('Are you sure you want to reset all fields?')) {
       setForm({
         gci: 52285.69,
-        years: 0.52,
+        years: 4.51,
         cpa: 862.25,
         monthlyFee: 144,
         royaltyRate: 1,
